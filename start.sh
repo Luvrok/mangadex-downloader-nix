@@ -1,5 +1,6 @@
 #!/bin/sh
 
+nix-shell
 set -x
 source venv/bin/activate &&
 unset PIP_LOG &&

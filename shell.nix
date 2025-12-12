@@ -9,9 +9,9 @@ let
 
 in pkgs.mkShell rec {
   buildInputs = with pkgs; [
-    python311Full
-    python311Packages.virtualenv
-    python311Packages.pillow
+    python313
+    python313Packages.virtualenv
+    python313Packages.pillow
     zlib
   ];
 }
