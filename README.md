@@ -3,7 +3,7 @@
 > manga downloading via CLI, much more convenient and easy to automate.
 > unfortunately, many manga titles were removed from mangadex.
 > this method is barely relevant now, although berserk is still available.
-> [github](https://github.com/mansuf/mangadex-downloader)
+> [mangadex-downloader](https://github.com/mansuf/mangadex-downloader)
 
 ## Quick start
 ##### If something goes wrong, remove the old venv and try again:
