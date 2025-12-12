@@ -1,57 +1,59 @@
 # mangadex-downloader. nix-shell guide.
 
-> скачивание манги через cli, гораздо удобнее и можно автоматизировать.
-> к сожалению многие манги были удалены с сайта mangadex. едва ли этот метод теперь актуален, хотя там все еще представлен берсерк. !иметь ввиду!
+> manga downloading via CLI, much more convenient and easy to automate.
+> unfortunately, many manga titles were removed from mangadex.
+> this method is barely relevant now, although berserk is still available.
 > [github](https://github.com/mansuf/mangadex-downloader)
----
-### Ниже представлены команды которые помогут запустить mangadex-downloader на nixos
-`python -m venv venv`
-`source venv/bin/activate`
-`unset PIP_LOG`
-`unset PIP_LOG_FILE`4
-`pip install --upgrade pip`
-`pip install /mangadex-downloader --verbose;`
 
-- pillow work only with python11 - https://github.com/python-pillow/Pillow/issues/6363
+## Quick start
+##### If something goes wrong, remove the old venv and try again:
+rm -rf venv
 
-for example:
-python3 -m mangadex_downloader -sc 18 -ec 18 -lang ru --folder ~/HOME/wizzard/manga/ "https://mangadex.org/title/801513ba-a712-498c-8f57-cae55b38cc92/berserk" --save-as "cbz"
--sc -- start volumn
--ec -- end volumn
--lang -- language, if you want check all available languages -- python3 -m mangadex_downloader --list-language "url"
---folder -- manga will be saved in the target folder
---save-as -- choose save as format, here about formats https://mangadex-dl.mansuf.link/en/stable/formats.html
-other cli options: https://mangadex-dl.mansuf.link/en/stable/cli_ref/cli_options.html?highlight=language#chapter-related
-### Подготовка окружения
-Создание и активация виртуального окружения Python:
-- `nix-shell`
-- `python -m venv venv`
-- `source venv/bin/activate`
+##### Enter nix-shell:
+nix-shell
 
-Очистка переменных окружения pip (актуально для NixOS):
-- `unset PIP_LOG`
-- `unset PIP_LOG_FILE`
+##### Create and activate a Python virtual environment:
+python -m venv venv
+source venv/bin/activate
 
-Обновление pip и установка mangadex-downloader:
-- `pip install --upgrade pip`
-- `pip install ./mangadex-downloader --verbose`
-### issues
-- Pillow корректно работает **только с Python 3.11**. Issue: https://github.com/python-pillow/Pillow/issues/6363
-### Пример использования
-Скачать 18-й том Berserk на русском языке и сохранить в формате cbz:
-- python3 -m mangadex_downloader -sc 18 -ec 18 -lang ru --folder /home/user/path_to_manga_folder "https://mangadex.org/title/801513ba-a712-498c-8f57-cae55b38cc92/berserk" --save-as cbz
-### Основные параметры
-- -sc — start volume (начальный том)
-- -ec — end volume (конечный том)
-- -lang — язык
----
-### Другое
-Проверка доступных языков:
-- python3 -m mangadex_downloader --list-language "URL"
-Дополнительные параметры:
-- --folder — папка сохранения
-- --save-as — формат сохранения
-### Форматы сохранения
+##### Install dependencies:
+./start.sh
+
+### What start.sh does:
+unsets pip env vars (NixOS):
+- unset PIP_LOG
+- unset PIP_LOG_FILE
+
+upgrades pip and installs mangadex-downloader:
+- pip install --upgrade pip
+- pip install mangadex-downloader --verbose
+
+### Issues
+Pillow works correctly only with Python 3.11.
+Issue: https://github.com/python-pillow/Pillow/issues/6363
+As of late 2025, there were no issues with Python 3.13; Python 3.15 was not tested.
+
+### Usage example
+Download volumes 1–5 of Berserk in Russian and save them as cbz:
+- python3 -m mangadex_downloader -sv 1 -ev 5 -lang ru --folder /home/user/path_to_manga_folder https://mangadex.org/title/801513ba-a712-498c-8f57-cae55b38cc92/berserk --save-as cbz
+
+### Main options
+- -sc — start chapter
+- -ec — end chapter
+- -sv — start volume
+- -ev — end volume
+- -lang — language
+
+### Other
+Check available languages:
+- python3 -m mangadex_downloader --list-language URL
+
+Additional options:
+- --folder — output directory
+- --save-as — output format
+
+### Output formats
 https://mangadex-dl.mansuf.link/en/stable/formats.html
-### Все CLI-опции
+
+### All CLI options
 https://mangadex-dl.mansuf.link/en/stable/cli_ref/cli_options.html
